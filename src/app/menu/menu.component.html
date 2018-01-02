@@ -1,0 +1,8 @@
+<ul class="nav">
+  <li *ngFor="let account of accounts">
+    <a routerLink="/account/{{account.id}}">
+      <i class="{{ account.icon }}"></i>
+      <p>{{ account.name }}</p>
+    </a>
+  </li>
+</ul>

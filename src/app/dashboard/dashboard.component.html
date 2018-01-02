@@ -1,0 +1,50 @@
+<div class="row">
+  <div *ngFor="let account of accounts" class="col-lg-3 col-sm-6">
+    <div class="card">
+      <div class="content">
+        <div class="row">
+          <div class="col-xs-4">
+            <div class="icon-big text-center">
+              <i class="{{ account.icon }} color-{{ account.color }}"></i>
+            </div>
+          </div>
+          <div class="col-xs-8">
+            <div class="numbers">
+              <p>{{ account.name }}</p>
+              {{ account.balance|currency:account.currency }}
+            </div>
+          </div>
+        </div>
+        <div class="footer">
+          <hr />
+          <div class="stats">
+            {{ account.balance|currency:account.currency }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="content table-responsive table-full-width">
+        <table class="table table-striped">
+          <tbody>
+            <tr *ngFor="let operation of operations">
+              <td><i class="{{ operation.account.icon }} color-{{ operation.account.color }}"></i></td>
+              <td>{{ operation.name }}</td>
+              <td>{{ operation.category.name}}</td>
+              <td>{{ operation.date|date:'EEE dd/MM' }}</td>
+              <td>{{ operation.amount|currency:operation.account.currency }}</td>
+              <td>
+                
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
