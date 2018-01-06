@@ -13,13 +13,15 @@ import { OperationService } from './operation.service';
 import { AccountComponent } from './account/account.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MenuComponent } from './menu/menu.component';
+import { OperationComponent } from './operation/operation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AccountComponent,
     DashboardComponent,
-    MenuComponent
+    MenuComponent,
+    OperationComponent
   ],
   imports: [
     BrowserModule,

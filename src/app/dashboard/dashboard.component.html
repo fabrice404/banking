@@ -10,15 +10,15 @@
           </div>
           <div class="col-xs-8">
             <div class="numbers">
-              <p>{{ account.name }}</p>
-              {{ account.balance|currency:account.currency }}
+              <p class="account-name">{{ account.name }}</p>
+              {{ (account.balance -- account.pending)|currency:account.currency:2 }}
             </div>
           </div>
         </div>
         <div class="footer">
           <hr />
           <div class="stats">
-            {{ account.balance|currency:account.currency }}
+            {{ account.balance|currency:account.currency:2 }}
           </div>
         </div>
       </div>
@@ -37,9 +37,10 @@
               <td>{{ operation.name }}</td>
               <td>{{ operation.category.name}}</td>
               <td>{{ operation.date|date:'EEE dd/MM' }}</td>
-              <td>{{ operation.amount|currency:operation.account.currency }}</td>
-              <td>
-                
+              <td class=text-right>{{ operation.amount|currency:operation.account.currency:2 }}</td>
+              <td class=text-right>
+                <a *ngIf="(operation.date|date:'yyyyMMdd') <= (now)" class="btn btn-primary btn-xs" (click)="checkOperation(operation.id)"><i class="fa fa-check"></i></a>
+                <a routerLink="/operation/{{operation.id}}" class="btn btn-primary btn-xs"><i class="fa fa-pen"></i></a>
               </td>
             </tr>
           </tbody>

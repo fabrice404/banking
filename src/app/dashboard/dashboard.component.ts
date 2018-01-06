@@ -11,12 +11,20 @@ import { OperationService } from '../operation.service';
 export class DashboardComponent implements OnInit {
   accounts: Account[];
   operations: Operation[];
+  now: string;
 
-  constructor(private accountService: AccountService, private operationService: OperationService) { }
+  constructor(
+    private accountService: AccountService,
+    private operationService: OperationService
+  ) { }
 
   ngOnInit() {
     this.getAccounts();
     this.getOperations();
+    let now = new Date();
+    this.now = now.getFullYear().toString()
+      + (now.getMonth() + 1).toString().padStart(2, '0')
+      + now.getDay().toString().padStart(2, '0');
   }
 
   getAccounts(): void {
@@ -27,5 +35,13 @@ export class DashboardComponent implements OnInit {
   getOperations(): void {
     this.operationService.getOperations()
       .subscribe(operations => this.operations = operations);
+  }
+
+  checkOperation(id: number): void {
+    this.operationService.check(id)
+      .subscribe(result => {
+        this.getAccounts();
+        this.getOperations();
+      });
   }
 }

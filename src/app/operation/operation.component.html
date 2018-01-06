@@ -1,0 +1,50 @@
+<div *ngIf="operation" class="card">
+  <div class="content">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group {{ errors.accountId ? 'has-error' : '' }}">
+          <label>Account</label>
+          <select [(ngModel)]="operation.accountId" class="form-control border-input">
+            <option *ngFor="let account of accounts" value="{{ account.id }}">{{ account.name }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group {{ errors.categoryId ? 'has-error' : '' }}">
+          <label>Category</label>
+          <select [(ngModel)]="operation.categoryId" class="form-control border-input">
+            <option *ngFor="let category of categories" value="{{ category.id }}">{{ category.name }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group {{ errors.amount ? 'has-error' : '' }}">
+          <label>Amount</label>
+          <input [(ngModel)]="operation.amount" placeholder="amount" class="form-control border-input">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group {{ errors.date ? 'has-error' : '' }}">
+          <label>Date</label>
+          <input [(ngModel)]="operation.date" placeholder="date" type="date" class="form-control border-input">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 {{ errors.name ? 'has-error' : '' }}">
+        <div class="form-group">
+          <label>Name</label>
+          <input [(ngModel)]="operation.name" placeholder="amount" class="form-control border-input">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <button *ngIf="operation.checked == null || operation.checked === false" (click)="save(operation)" class="btn btn-info btn-fill btn-wd">{{ operation.id == null ? "Add" : "Update" }}</button>
+        <button *ngIf="operation.checked == true" (click)="cancel(operation)" class="btn btn-info btn-fill btn-wd">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
