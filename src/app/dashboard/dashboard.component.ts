@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
     let now = new Date();
     this.now = now.getFullYear().toString()
       + (now.getMonth() + 1).toString().padStart(2, '0')
-      + now.getDay().toString().padStart(2, '0');
+      + now.getDate().toString().padStart(2, '0');
   }
 
   getAccounts(): void {
