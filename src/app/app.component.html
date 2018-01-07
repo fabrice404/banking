@@ -3,8 +3,7 @@
     <div class="sidebar-wrapper">
       <div class="logo">
         <a routerLink="dashboard" class="simple-text">
-          <i class="fa fa-chart-line"></i>
-          BANK
+          &nbsp;
         </a>
       </div>
       <app-menu></app-menu>
@@ -21,7 +20,14 @@
               <span class="icon-bar bar2"></span>
               <span class="icon-bar bar3"></span>
           </button>
-          <a class="navbar-brand" routerLink="dashboard">Dashboard</a>
+          <a class="navbar-brand" routerLink="dashboard">Bank accounts</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a routerLink="operation"><i class="fa fa-plus"></i> <p>Add operation</p></a>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
