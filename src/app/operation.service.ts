@@ -16,23 +16,23 @@ export class OperationService {
   ) { }
 
   getOperations(): Observable<Operation[]> {
-    return this.http.get<Operation[]>(this.url);
+    return this.http.get<Operation[]>(`${this.url}`);
   }
 
   getOperation(id: number): Observable<Operation> {
-    return this.http.get<Operation>(this.url + '/' + id);
+    return this.http.get<Operation>(`${this.url}/${id}`);
   }
 
   check(id: number): Observable<Operation> {
-    return this.http.patch<Operation>(this.url + '/' + id, { checked: true });
+    return this.http.patch<Operation>(`${this.url}/${id}`, { checked: true });
   }
 
   uncheck(id: number): Observable<Operation> {
-    return this.http.patch<Operation>(this.url + '/' + id, { checked: false });
+    return this.http.patch<Operation>(`${this.url}/${id}`, { checked: false });
   }
 
   create(operation: Operation): Observable<Operation> {
-    return this.http.post<Operation>(this.url, {
+    return this.http.post<Operation>(`${this.url}`, {
       name: operation.name,
       accountId: operation.accountId,
       categoryId: operation.categoryId,
@@ -42,7 +42,7 @@ export class OperationService {
   }
 
   update(operation: Operation): Observable<Operation> {
-    return this.http.put<Operation>(this.url + '/' + operation.id, {
+    return this.http.put<Operation>(`${this.url}/${operation.id}`, {
       name: operation.name,
       accountId: operation.accountId,
       categoryId: operation.categoryId,

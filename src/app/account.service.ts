@@ -15,10 +15,10 @@ export class AccountService {
   ) { }
 
   getAccounts(): Observable<Account[]> {
-    return this.http.get<Account[]>(this.url);
+    return this.http.get<Account[]>(`${this.url}`);
   }
 
   getAccount(id: number): Observable<Account> {
-    return this.http.get<Account>(this.url + '/' + id);
+    return this.http.get<Account>(`${this.url}/${id}`);
   }
 }

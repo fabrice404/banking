@@ -15,10 +15,10 @@ export class CategoryService {
   ) { }
 
   getCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(this.url);
+    return this.http.get<Category[]>(`${this.url}`);
   }
 
   getCategory(id: number): Observable<Category> {
-    return this.http.get<Category>(this.url + '/' + id);
+    return this.http.get<Category>(`${this.url}/${id}`);
   }
 }
