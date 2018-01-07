@@ -11,14 +11,14 @@
           <div class="col-xs-8">
             <div class="numbers">
               <p class="account-name">{{ account.name }}</p>
-              {{ (account.balance -- account.pending)|currency:account.currency:2 }}
+              {{ account.balance|currency:account.currency:2 }}
             </div>
           </div>
         </div>
         <div class="footer">
           <hr />
           <div class="stats">
-            {{ account.balance|currency:account.currency:2 }}
+            {{ (account.balance -- account.pending)|currency:account.currency:2 }}
           </div>
         </div>
       </div>
@@ -36,7 +36,7 @@
               <td><i class="{{ operation.account.icon }} color-{{ operation.account.color }}"></i></td>
               <td>{{ operation.name }}</td>
               <td>{{ operation.category.name}}</td>
-              <td>{{ operation.date|date:'EEE dd/MM' }}</td>
+              <td class=text-right>{{ operation.date|date:'EEE dd/MM' }}</td>
               <td class=text-right>{{ operation.amount|currency:operation.account.currency:2 }}</td>
               <td class=text-right>
                 <a *ngIf="(operation.date|date:'yyyyMMdd') <= (now)" class="btn btn-success btn-xs btn-icon" (click)="checkOperation(operation.id)"><i class="fa fa-check"></i></a>
