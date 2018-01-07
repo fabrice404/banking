@@ -1,3 +1,53 @@
 <div *ngIf="account">
-  {{ account.name }} {{ account.balance }}
-</div>
+  <div class="card">
+    <div class="header">
+      <div class="row">
+        <div class="col-md-10">
+          <h3>{{ account.name }} - {{ currentMonth }}</h3>
+        </div>
+        <div class="col-md-2 text-right">
+          <h3><button class="btn btn-primary btn-icon" onclick="$('.filter').toggle(); return false;"><i class="fa fa-calendar-alt"></i></button></h3>
+        </div>
+      </div>
+      <div class="row filter">
+        <div *ngFor="let date of dates" class="col-md-2 text-center dropdown">
+          <h6>{{ date.year }}</h6>
+          <ul>
+            <li *ngFor="let month of date.months">
+              <a routerLink="/account/{{ account.id }}/{{ month.year }}/{{ month.month }}">
+            <small>{{ month.name }}</small>
+          </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive table-full-width">
+            <p class="text-center" *ngIf="operations == null">
+              No operation
+            </p>
+            <table class="table table-striped" *ngIf="operations != null">
+              <tbody>
+                <tr *ngFor="let operation of operations">
+                  <td><i class="{{ operation.account.icon }} color-{{ operation.account.color }}"></i></td>
+                  <td>{{ operation.name }}</td>
+                  <td>{{ operation.category.name}}</td>
+                  <td class=text-right>{{ operation.date|date:'EEE dd/MM' }}</td>
+                  <td class=text-right>{{ operation.amount|currency:operation.account.currency:2 }}</td>
+                  <td class=text-right>
+                    <a *ngIf="(operation.date|date:'yyyyMMdd') <= (now) && !operation.checked" class="btn btn-success btn-xs btn-icon" (click)="checkOperation(operation.id)"><i class="fa fa-check"></i></a>
+                    <a *ngIf="operation.checked" class="btn btn-danger btn-xs btn-icon" (click)="uncheckOperation(operation.id)"><i class="fa fa-times"></i></a>
+                    <a routerLink="/operation/{{operation.id}}" class="btn btn-info btn-xs btn-icon"><i class="fa fa-pen"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

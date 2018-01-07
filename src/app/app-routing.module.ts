@@ -8,6 +8,7 @@ import { OperationComponent } from './operation/operation.component';
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'account/:id', component: AccountComponent },
+  { path: 'account/:id/:year/:month', component: AccountComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'operation', component: OperationComponent },
   { path: 'operation/:id', component: OperationComponent }

@@ -25,7 +25,7 @@ export class OperationComponent implements OnInit {
     private router: Router,
     private accountService: AccountService,
     private categoryService: CategoryService,
-    private operationService: OperationService,
+    private operationService: OperationService
   ) { }
 
   ngOnInit() {

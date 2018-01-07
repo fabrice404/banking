@@ -23,6 +23,10 @@ export class OperationService {
     return this.http.get<Operation>(`${this.url}/${id}`);
   }
 
+  getOpeartionsForAccountAndMonth(accountId: number, month: number, year: number): Observable<Operation[]> {
+    return this.http.get<Operation[]>(`${this.url}/?t=am&a=${accountId}&m=${month}&y=${year}`);
+  }
+
   check(id: number): Observable<Operation> {
     return this.http.patch<Operation>(`${this.url}/${id}`, { checked: true });
   }
