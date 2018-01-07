@@ -39,8 +39,8 @@
               <td>{{ operation.date|date:'EEE dd/MM' }}</td>
               <td class=text-right>{{ operation.amount|currency:operation.account.currency:2 }}</td>
               <td class=text-right>
-                <a *ngIf="(operation.date|date:'yyyyMMdd') <= (now)" class="btn btn-primary btn-xs" (click)="checkOperation(operation.id)"><i class="fa fa-check"></i></a>
-                <a routerLink="/operation/{{operation.id}}" class="btn btn-primary btn-xs"><i class="fa fa-pen"></i></a>
+                <a *ngIf="(operation.date|date:'yyyyMMdd') <= (now)" class="btn btn-success btn-xs btn-icon" (click)="checkOperation(operation.id)"><i class="fa fa-check"></i></a>
+                <a routerLink="/operation/{{operation.id}}" class="btn btn-info btn-xs btn-icon"><i class="fa fa-pen"></i></a>
               </td>
             </tr>
           </tbody>
