@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AccountService } from './account.service';
 import { CategoryService } from './category.service';
 import { OperationService } from './operation.service';
+import { StatisticsService } from './statistics.service';
 
 import { AccountComponent } from './account/account.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -24,12 +25,19 @@ import { OperationComponent } from './operation/operation.component';
     OperationComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     FormsModule,
-    AppRoutingModule,
     HttpClientModule
   ],
-  providers: [AccountService, CategoryService, OperationService],
-  bootstrap: [AppComponent]
+  providers: [
+    AccountService,
+    CategoryService,
+    OperationService,
+    StatisticsService
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
