@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { ChartModule } from 'angular-highcharts';
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -27,6 +29,7 @@ import { OperationComponent } from './operation/operation.component';
   imports: [
     AppRoutingModule,
     BrowserModule,
+    ChartModule,
     FormsModule,
     HttpClientModule
   ],

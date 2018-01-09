@@ -1,9 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
 
+import { Chart } from 'angular-highcharts';
+
 import { AccountService } from '../account.service';
 import { OperationService } from '../operation.service';
+import { StatisticsService } from '../statistics.service';
 
 import { Account } from '../account';
 import { Operation } from '../operation';
@@ -20,12 +23,15 @@ export class AccountComponent implements OnInit {
   dates: object[];
   currentMonth: string;
   monthNames: string[];
+  chart: any;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private elementRef: ElementRef,
     private accountService: AccountService,
-    private operationService: OperationService
+    private operationService: OperationService,
+    private statisticsService: StatisticsService
   ) {
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -73,6 +79,7 @@ export class AccountComponent implements OnInit {
   }
 
   getOperations(): void {
+    let accountId = parseInt(this.route.snapshot.paramMap.get('id'));
     let now = new Date();
     let month = now.getMonth() + 1;
     let year = now.getFullYear();
@@ -83,7 +90,54 @@ export class AccountComponent implements OnInit {
       year = parseInt(this.route.snapshot.paramMap.get('year'));
     }
     this.currentMonth = `${this.monthNames[month]} ${year}`;
-    this.operationService.getOpeartionsForAccountAndMonth(parseInt(this.route.snapshot.paramMap.get('id')), month, year)
+    this.operationService.getOpeartionsForAccountAndMonth(accountId, month, year)
       .subscribe(operations => this.operations = operations)
+
+    this.statisticsService.getAccountDayBalance(accountId, month, year)
+      .subscribe(balance => {
+        this.statisticsService.getOperationsDailyBalance(accountId, month, year)
+          .subscribe(days => {
+            balance = parseFloat(balance.balance);
+
+            let data = [];
+            let min = 999999;
+            days.forEach(day => {
+              balance = (Math.floor(balance * 100) + Math.floor(day.balance * 100)) / 100;
+              data.push([Date.parse(day.date), balance]);
+              if (balance < min) {
+                min = balance;
+              }
+            });
+            
+            this.chart = new Chart({
+              chart: { type: 'spline' },
+              title: { text: '' },
+              xAxis: {
+                type: 'datetime',
+              },
+              plotOptions: {
+                spline: {
+                  marker: { enabled: true }
+                },
+                series: {
+                  zones: [{
+                    value: 0,
+                    color: 'red'
+                  }, {
+                    value: 500,
+                    color: 'orange'
+                  }, {
+                    color: 'green'
+                  }]
+                }
+              },
+              series: [{
+                name: this.account.name,
+                data: data
+              }]
+            });
+          })
+      })
+
   }
 }
