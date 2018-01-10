@@ -35,20 +35,23 @@ export class AccountComponent implements OnInit {
   ) {
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.init()
+        this.init();
       }
-    })
+    });
   }
   ngOnInit() { }
 
   init(): void {
-    let now = new Date();
+    const now = new Date();
     this.now = now.getFullYear().toString()
       + (now.getMonth() + 1).toString().padStart(2, '0')
       + now.getDate().toString().padStart(2, '0');
 
     // dates
-    this.monthNames = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    this.monthNames = ['',
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
     this.dates = [];
 
     let year = null;
@@ -58,7 +61,7 @@ export class AccountComponent implements OnInit {
       }
       year = { year: i, months: [] };
       for (let j = 1; j <= 12; j++) {
-        if (i < now.getFullYear() || (i == now.getFullYear() && j <= now.getMonth() + 1)) {
+        if (i < now.getFullYear() || (i === now.getFullYear() && j <= now.getMonth() + 1)) {
           year.months.push({
             month: j,
             name: this.monthNames[j],
@@ -74,24 +77,24 @@ export class AccountComponent implements OnInit {
   }
 
   getAccount(): void {
-    this.accountService.getAccount(parseInt(this.route.snapshot.paramMap.get('id')))
-      .subscribe(account => this.account = account)
+    this.accountService.getAccount(parseInt(this.route.snapshot.paramMap.get('id'), 10))
+      .subscribe(account => this.account = account);
   }
 
   getOperations(): void {
-    let accountId = parseInt(this.route.snapshot.paramMap.get('id'));
-    let now = new Date();
+    const accountId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
+    const now = new Date();
     let month = now.getMonth() + 1;
     let year = now.getFullYear();
     if (this.route.snapshot.paramMap.get('month') != null) {
-      month = parseInt(this.route.snapshot.paramMap.get('month'));
+      month = parseInt(this.route.snapshot.paramMap.get('month'), 10);
     }
     if (this.route.snapshot.paramMap.get('year') != null) {
-      year = parseInt(this.route.snapshot.paramMap.get('year'));
+      year = parseInt(this.route.snapshot.paramMap.get('year'), 10);
     }
     this.currentMonth = `${this.monthNames[month]} ${year}`;
     this.operationService.getOpeartionsForAccountAndMonth(accountId, month, year)
-      .subscribe(operations => this.operations = operations)
+      .subscribe(operations => this.operations = operations);
 
     this.statisticsService.getAccountDayBalance(accountId, month, year)
       .subscribe(balance => {
@@ -99,7 +102,7 @@ export class AccountComponent implements OnInit {
           .subscribe(days => {
             balance = parseFloat(balance.balance);
 
-            let data = [];
+            const data = [];
             let min = 999999;
             days.forEach(day => {
               balance = (Math.floor(balance * 100) + Math.floor(day.balance * 100)) / 100;
@@ -108,7 +111,7 @@ export class AccountComponent implements OnInit {
                 min = balance;
               }
             });
-            
+
             this.chart = new Chart({
               chart: { type: 'spline' },
               title: { text: '' },
@@ -136,8 +139,8 @@ export class AccountComponent implements OnInit {
                 data: data
               }]
             });
-          })
-      })
+          });
+      });
 
   }
 }

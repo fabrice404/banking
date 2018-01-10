@@ -38,12 +38,11 @@ export class OperationComponent implements OnInit {
   getOperation(): void {
     if (this.route.snapshot.paramMap.get('id') == null) {
       this.operation = new Operation();
-    }
-    else {
+    } else {
       const id = this.route.snapshot.paramMap.get('id');
-      this.operationService.getOperation(parseInt(id))
+      this.operationService.getOperation(parseInt(id, 10))
         .subscribe(operation => {
-          operation.date = operation.date.substring(0, 10)
+          operation.date = operation.date.substring(0, 10);
           this.operation = operation;
         });
     }
@@ -66,7 +65,7 @@ export class OperationComponent implements OnInit {
       amount: false,
       date: false,
       name: false
-    }
+    };
   }
 
   save(): void {
@@ -80,13 +79,13 @@ export class OperationComponent implements OnInit {
         });
     } else {
       this.operationService.update(this.operation)
-        .subscribe(() => { this.router.navigate(['dashboard']) })
+        .subscribe(() => this.router.navigate(['dashboard']));
     }
   }
 
   cancel(): void {
     this.initErrors();
     this.operationService.uncheck(this.operation.id)
-      .subscribe(operation => this.operation = operation)
+      .subscribe(operation => this.operation = operation);
   }
 }

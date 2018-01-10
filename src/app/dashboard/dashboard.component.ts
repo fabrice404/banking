@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.getAccounts();
     this.getOperations();
-    let now = new Date();
+    const now = new Date();
     this.now = now.getFullYear().toString()
       + (now.getMonth() + 1).toString().padStart(2, '0')
       + now.getDate().toString().padStart(2, '0');
