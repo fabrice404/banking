@@ -1,12 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { ChartModule } from 'angular-highcharts';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+
+import { AuthInterceptor } from './auth.interceptor';
 
 import { AccountService } from './account.service';
 import { CategoryService } from './category.service';
@@ -37,7 +39,12 @@ import { OperationComponent } from './operation/operation.component';
     AccountService,
     CategoryService,
     OperationService,
-    StatisticsService
+    StatisticsService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    }
   ],
   bootstrap: [
     AppComponent
