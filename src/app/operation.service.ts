@@ -18,6 +18,10 @@ export class OperationService {
     return this.http.get<Operation[]>(`${this.url}`);
   }
 
+  getDownloadedOperations(): Observable<Operation[]> {
+    return this.http.get<Operation[]>(`${this.url}/?t=d`);
+  }
+
   getOperation(id: number): Observable<Operation> {
     return this.http.get<Operation>(`${this.url}/${id}`);
   }
@@ -32,6 +36,10 @@ export class OperationService {
 
   uncheck(id: number): Observable<Operation> {
     return this.http.patch<Operation>(`${this.url}/${id}`, { checked: false });
+  }
+
+  link(did: number, id: number): Observable<Operation> {
+    return this.http.patch<Operation>(`${this.url}/${id}`, { did: did });
   }
 
   create(operation: Operation): Observable<Operation> {

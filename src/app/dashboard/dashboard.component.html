@@ -15,10 +15,17 @@
             </div>
           </div>
         </div>
-        <div class="footer">
-          <hr />
-          <div class="stats">
-            {{ (account.balance -- account.pending)|currency:account.currency:2 }}
+        <div class="row stats">
+          <div class="col-xs-6">
+            &nbsp;
+            <span *ngIf="account.balance !== account.pending">
+              {{ account.pending|currency:account.currency:2 }}
+            </span>
+          </div>
+          <div class="col-xs-6 text-right">
+            <span *ngIf="account.balance !== account.downloaded">
+              {{ account.downloaded|currency:account.currency:2 }}
+            </span>
           </div>
         </div>
       </div>
@@ -33,14 +40,60 @@
         <table class="table table-striped">
           <tbody>
             <tr *ngFor="let operation of operations">
-              <td><i class="{{ operation.account.icon }} color-{{ operation.account.color }}"></i></td>
-              <td>{{ operation.name }}</td>
+              <td>
+                <i class="{{ operation.account.icon }} color-{{ operation.account.color }}"></i>
+              </td>
+              <td>
+                {{ operation.name }}
+                <div *ngFor="let downloadedOperation of downloadedOperations">
+                  <small *ngIf="downloadedOperation.amount === operation.amount && downloadedOperation.account.id === operation.account.id"
+                    class="color-{{ operation.account.color }}">
+                    {{ downloadedOperation.name }} - {{ downloadedOperation.date }}
+                    <a (click)="linkOperation(downloadedOperation.id, operation.id)">
+                      <i class="fa fa-link"></i>
+                    </a>
+                  </small>
+                </div>
+              </td>
               <td>{{ operation.category.name}}</td>
               <td class=text-right>{{ operation.date|date:'EEE dd/MM' }}</td>
               <td class=text-right>{{ operation.amount|currency:operation.account.currency:2 }}</td>
               <td class=text-right>
-                <a *ngIf="(operation.date|date:'yyyyMMdd') <= (now)" class="btn btn-success btn-xs btn-icon" (click)="checkOperation(operation.id)"><i class="fa fa-check"></i></a>
-                <a routerLink="/operation/{{operation.id}}" class="btn btn-info btn-xs btn-icon"><i class="fa fa-pen"></i></a>
+                <a *ngIf="(operation.date|date:'yyyyMMdd') <= (now)" class="btn btn-success btn-xs btn-icon" (click)="checkOperation(operation.id)">
+                  <i class="fa fa-check"></i>
+                </a>
+                <a routerLink="/operation/{{operation.id}}" class="btn btn-info btn-xs btn-icon">
+                  <i class="fa fa-pen"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="downloadedOperations" class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="content table-responsive table-full-width">
+        <table class="table table-striped">
+          <tbody>
+            <tr *ngFor="let downloadedOperation of downloadedOperations">
+              <td>
+                <i class="{{ downloadedOperation.account.icon }} color-{{ downloadedOperation.account.color }}"></i>
+              </td>
+              <td>
+                {{ downloadedOperation.name }}
+              </td>
+              <td class=text-right>{{ downloadedOperation.date }}</td>
+              <td class=text-right>{{ downloadedOperation.amount|currency:downloadedOperation.account.currency:2 }}</td>
+              <td class=text-right>
+                <a routerLink="/operation" [queryParams]="{account: downloadedOperation.accountId, amount: downloadedOperation.amount, date:downloadedOperation.date, name: downloadedOperation.name}"
+                  class="btn btn-info btn-xs btn-icon">
+                  <i class="fa fa-plus"></i>
+                </a>
               </td>
             </tr>
           </tbody>

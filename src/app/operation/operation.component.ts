@@ -38,6 +38,19 @@ export class OperationComponent implements OnInit {
   getOperation(): void {
     if (this.route.snapshot.paramMap.get('id') == null) {
       this.operation = new Operation();
+      if (this.route.snapshot.queryParamMap.get('account') != null) {
+        this.operation.accountId = parseFloat(this.route.snapshot.queryParamMap.get('account'));
+      }
+      if (this.route.snapshot.queryParamMap.get('amount') != null) {
+        this.operation.amount = parseFloat(this.route.snapshot.queryParamMap.get('amount'));
+      }
+      if (this.route.snapshot.queryParamMap.get('date') != null) {
+        const tmp = this.route.snapshot.queryParamMap.get('date').split('/');
+        this.operation.date = `${tmp[2]}-${tmp[1]}-${tmp[0]}`;
+      }
+      if (this.route.snapshot.queryParamMap.get('name') != null) {
+        this.operation.name = this.route.snapshot.queryParamMap.get('name');
+      }
     } else {
       const id = this.route.snapshot.paramMap.get('id');
       this.operationService.getOperation(parseInt(id, 10))
