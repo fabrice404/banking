@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Account } from '../account';
-import { AccountService } from '../account.service';
 import { Operation } from '../operation';
+
+import { AccountService } from '../account.service';
+import { CategoryService } from '../category.service';
 import { OperationService } from '../operation.service';
 
 @Component({
@@ -16,6 +19,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
+    private categoryService: CategoryService,
     private operationService: OperationService
   ) { }
 
@@ -31,6 +35,8 @@ export class DashboardComponent implements OnInit {
   getAccounts(): void {
     this.accountService.getAccounts()
       .subscribe(accounts => this.accounts = accounts);
+    this.categoryService.getCategories()
+      .subscribe(categories => { })
   }
 
   getOperations(): void {
