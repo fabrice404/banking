@@ -1,4 +1,26 @@
-<div class="row">
+<div *ngIf="accounts == null">
+  <div class="col-lg-3 col-sm-6 text-center">
+    <div class="card">
+      <div class="content stats">
+        <i class="fa fa-spinner-third fa-spin fa-2x"></i>
+        <div>Loading accounts</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="operations == null">
+  <div class="col-lg-12 text-center">
+    <div class="card">
+      <div class="content stats">
+        <i class="fa fa-spinner-third fa-spin fa-2x"></i>
+        <div>Loading operations</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="operations != null" class="row">
   <div *ngFor="let account of accounts" class="col-lg-3 col-sm-6">
     <div class="card">
       <div class="content">
@@ -33,7 +55,7 @@
   </div>
 </div>
 
-<div class="row">
+<div *ngIf="operations != null" class="row">
   <div class="col-md-12">
     <div class="card">
       <div class="content table-responsive table-full-width">

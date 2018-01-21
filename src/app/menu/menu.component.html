@@ -1,4 +1,9 @@
 <ul class="nav">
+  <li *ngIf="accounts == null">
+    <a>
+      <i class="fa fa-spinner-third fa-spin"></i>
+    </a>
+  </li>
   <li *ngFor="let account of accounts">
     <a routerLink="/account/{{account.id}}">
       <i class="{{ account.icon }}"></i>
