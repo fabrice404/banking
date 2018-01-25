@@ -58,37 +58,88 @@
 <div *ngIf="operations != null" class="row">
   <div class="col-md-12">
     <div class="card">
+      <div class="header">
+        <h4 class="title">Past operations</h4>
+      </div>
       <div class="content table-responsive table-full-width">
         <table class="table table-striped">
           <tbody>
-            <tr *ngFor="let operation of operations">
-              <td>
-                <i class="{{ operation.account.icon }} color-{{ operation.account.color }}"></i>
-              </td>
-              <td>
-                {{ operation.name }}
-                <div *ngFor="let downloadedOperation of downloadedOperations">
-                  <small *ngIf="downloadedOperation.amount === operation.amount && downloadedOperation.account.id === operation.account.id"
-                    class="color-{{ operation.account.color }}">
-                    {{ downloadedOperation.name }} - {{ downloadedOperation.date }}
-                    <a (click)="linkOperation(downloadedOperation.id, operation.id)">
-                      <i class="fa fa-link"></i>
-                    </a>
-                  </small>
-                </div>
-              </td>
-              <td>{{ operation.category.name}}</td>
-              <td class=text-right>{{ operation.date|date:'EEE dd/MM' }}</td>
-              <td class=text-right>{{ operation.amount|currency:operation.account.currency:2 }}</td>
-              <td class=text-right>
-                <a *ngIf="(operation.date|date:'yyyyMMdd') <= (now)" class="btn btn-success btn-xs btn-icon" (click)="checkOperation(operation.id)">
-                  <i class="fa fa-check"></i>
-                </a>
-                <a routerLink="/operation/{{operation.id}}" class="btn btn-info btn-xs btn-icon">
-                  <i class="fa fa-pen"></i>
-                </a>
-              </td>
-            </tr>
+            <ng-container *ngFor="let operation of operations">
+              <tr *ngIf="(operation.date|date:'yyyyMMdd') <= (now)">
+                <td>
+                  <i class="{{ operation.account.icon }} color-{{ operation.account.color }}"></i>
+                </td>
+                <td>
+                  {{ operation.name }}
+                  <div *ngFor="let downloadedOperation of downloadedOperations">
+                    <small *ngIf="downloadedOperation.amount === operation.amount && downloadedOperation.account.id === operation.account.id"
+                      class="color-{{ operation.account.color }}">
+                      {{ downloadedOperation.name }} - {{ downloadedOperation.date }}
+                      <a (click)="linkOperation(downloadedOperation.id, operation.id)">
+                        <i class="fa fa-link"></i>
+                      </a>
+                    </small>
+                  </div>
+                </td>
+                <td>{{ operation.category.name}}</td>
+                <td class=text-right>{{ operation.date|date:'EEE dd/MM' }}</td>
+                <td class=text-right>{{ operation.amount|currency:operation.account.currency:2 }}</td>
+                <td class=text-right>
+                  <a *ngIf="(operation.date|date:'yyyyMMdd') <= (now)" class="btn btn-success btn-xs btn-icon" (click)="checkOperation(operation.id)">
+                    <i class="fa fa-check"></i>
+                  </a>
+                  <a routerLink="/operation/{{operation.id}}" class="btn btn-info btn-xs btn-icon">
+                    <i class="fa fa-pen"></i>
+                  </a>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="operations != null" class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Incoming operations</h4>
+      </div>
+      <div class="content table-responsive table-full-width">
+        <table class="table table-striped">
+          <tbody>
+            <ng-container *ngFor="let operation of operations">
+              <tr *ngIf="(operation.date|date:'yyyyMMdd') > (now)">
+                <td>
+                  <i class="{{ operation.account.icon }} color-{{ operation.account.color }}"></i>
+                </td>
+                <td>
+                  {{ operation.name }}
+                  <div *ngFor="let downloadedOperation of downloadedOperations">
+                    <small *ngIf="downloadedOperation.amount === operation.amount && downloadedOperation.account.id === operation.account.id"
+                      class="color-{{ operation.account.color }}">
+                      {{ downloadedOperation.name }} - {{ downloadedOperation.date }}
+                      <a (click)="linkOperation(downloadedOperation.id, operation.id)">
+                        <i class="fa fa-link"></i>
+                      </a>
+                    </small>
+                  </div>
+                </td>
+                <td>{{ operation.category.name}}</td>
+                <td class=text-right>{{ operation.date|date:'EEE dd/MM' }}</td>
+                <td class=text-right>{{ operation.amount|currency:operation.account.currency:2 }}</td>
+                <td class=text-right>
+                  <a *ngIf="(operation.date|date:'yyyyMMdd') <= (now)" class="btn btn-success btn-xs btn-icon" (click)="checkOperation(operation.id)">
+                    <i class="fa fa-check"></i>
+                  </a>
+                  <a routerLink="/operation/{{operation.id}}" class="btn btn-info btn-xs btn-icon">
+                    <i class="fa fa-pen"></i>
+                  </a>
+                </td>
+              </tr>
+            </ng-container>
           </tbody>
         </table>
       </div>
@@ -99,6 +150,9 @@
 <div *ngIf="downloadedOperations" class="row">
   <div class="col-md-12">
     <div class="card">
+      <div class="header">
+        <h4 class="title">Downloaded operations</h4>
+      </div>
       <div class="content table-responsive table-full-width">
         <table class="table table-striped">
           <tbody>
