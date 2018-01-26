@@ -1,45 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 
-ul {
-  padding: 0;
-}
+ul { padding: 0; }
+li { list-style-type: none; }
 
-li {
-  list-style-type: none;
-}
+td { padding-top: 4px !important; padding-bottom: 4px !important; }
+td.icon { width: 5%; }
+td.category { width: 20%; }
+td.date, td.amount, td.buttons { width: 10%; }
 
-.filter {
-  display: none;
-}
+.account-name { white-space: nowrap; }
+.filter { display: none; }
 
-.account-name {
-  white-space: nowrap;
-}
+.color-boursorama { color: #d10173; }
+.color-caisse-epargne { color: #e11624; }
+.color-n26 { color: #333333; }
+.color-revolut { color: #05d2f5; }
 
-.color-e11624 {
-  color: #e11624;
-}
-
-.color-3bd0d6 {
-  color: #3bd0d6;
-}
-
-.color-ff79c2 {
-  color: #ff79c2;
-}
-
-.color-1496fd {
-  color: #1496fd;
-}
-
-.color-d3b1fa {
-  color: #d3b1fa;
-}
-
-.color-d10173 {
-  color: #d10173;
-}
-
-.color-05d2f5 {
-  color: #05d2f5;
-}
+.color-cecilie { color: #ff79c2; }
+.color-fabrice { color: #1496fd; }
+.color-noemie { color: #d3b1fa; }
