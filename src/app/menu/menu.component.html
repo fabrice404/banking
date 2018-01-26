@@ -1,13 +1,22 @@
 <ul class="nav">
+  <li [ngClass]="{ active: router.url == '/dashboard' }">
+    <a routerLink="/dashboard">
+      <i class="fa fa-tasks"></i>
+      <p>Dashboard
+        {{selectedItem}}</p>
+    </a>
+  </li>
   <li *ngIf="accounts == null">
     <a>
       <i class="fa fa-spinner-third fa-spin"></i>
     </a>
   </li>
-  <li *ngFor="let account of accounts">
-    <a routerLink="/account/{{account.id}}">
-      <i class="{{ account.icon }}"></i>
-      <p>{{ account.name }}</p>
-    </a>
-  </li>
+  <ng-container *ngFor="let account of accounts">
+    <li [ngClass]="{ active: router.url == '/account/' + account.id }">
+      <a routerLink="/account/{{account.id}}">
+        <i class="{{ account.icon }}"></i>
+        <p>{{ account.name }}</p>
+      </a>
+    </li>
+  </ng-container>
 </ul>

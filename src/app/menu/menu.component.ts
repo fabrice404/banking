@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { Router } from '@angular/router';
+
 import { Account } from '../account';
 import { AccountService } from '../account.service';
 
@@ -8,8 +11,12 @@ import { AccountService } from '../account.service';
 })
 export class MenuComponent implements OnInit {
   accounts: Account[];
+  selectedItem: string;
 
-  constructor(private accountService: AccountService) { }
+  constructor(
+    private router: Router,
+    private accountService: AccountService
+  ) { }
 
   ngOnInit() {
     this.getAccounts();
