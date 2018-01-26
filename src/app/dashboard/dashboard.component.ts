@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
     this.accountService.getAccounts()
       .subscribe(accounts => this.accounts = accounts);
     this.categoryService.getCategories()
-      .subscribe(categories => { })
+      .subscribe(categories => { });
   }
 
   getOperations(): void {
