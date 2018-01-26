@@ -6,7 +6,11 @@
           <h3>{{ account.name }} - {{ currentMonth }}</h3>
         </div>
         <div class="col-md-2 text-right">
-          <h3><button class="btn btn-primary btn-icon" onclick="$('.filter').toggle(); return false;"><i class="fa fa-calendar-alt"></i></button></h3>
+          <h3>
+            <button class="btn btn-primary btn-icon" onclick="$('.filter').toggle(); return false;">
+              <i class="fa fa-calendar-alt"></i>
+            </button>
+          </h3>
         </div>
       </div>
       <div class="row filter">
@@ -15,8 +19,8 @@
           <ul>
             <li *ngFor="let month of date.months">
               <a routerLink="/account/{{ account.id }}/{{ month.year }}/{{ month.month }}">
-            <small>{{ month.name }}</small>
-          </a>
+                <small>{{ month.name }}</small>
+              </a>
             </li>
           </ul>
         </div>
@@ -36,15 +40,23 @@
             <table class="table table-striped" *ngIf="operations != null">
               <tbody>
                 <tr *ngFor="let operation of operations">
-                  <td><i class="{{ operation.account.icon }} color-{{ operation.account.color }}"></i></td>
+                  <td class="text-center icon">
+                    <i class="{{ operation.account.icon }} color-{{ operation.account.color }}"></i>
+                  </td>
                   <td>{{ operation.name }}</td>
-                  <td>{{ operation.category.name}}</td>
-                  <td class=text-right>{{ operation.date|date:'EEE dd/MM' }}</td>
-                  <td class=text-right>{{ operation.amount|currency:operation.account.currency:2 }}</td>
-                  <td class=text-right>
-                    <a *ngIf="(operation.date|date:'yyyyMMdd') <= (now) && !operation.checked" class="btn btn-success btn-xs btn-icon" (click)="checkOperation(operation.id)"><i class="fa fa-check"></i></a>
-                    <a *ngIf="operation.checked" class="btn btn-danger btn-xs btn-icon" (click)="uncheckOperation(operation.id)"><i class="fa fa-times"></i></a>
-                    <a routerLink="/operation/{{operation.id}}" class="btn btn-info btn-xs btn-icon"><i class="fa fa-pen"></i></a>
+                  <td class="category">{{ operation.category.name}}</td>
+                  <td class="text-right date">{{ operation.date|date:'EEE dd/MM' }}</td>
+                  <td class="text-right amount">{{ operation.amount|currency:operation.account.currency:2 }}</td>
+                  <td class="text-right buttons">
+                    <a *ngIf="(operation.date|date:'yyyyMMdd') <= (now) && !operation.checked" class="btn btn-success btn-xs" (click)="checkOperation(operation.id)">
+                      <i class="fa fa-check"></i>
+                    </a>
+                    <a *ngIf="operation.checked" class="btn btn-danger btn-xs" (click)="uncheckOperation(operation.id)">
+                      <i class="fa fa-times"></i>
+                    </a>
+                    <a routerLink="/operation/{{operation.id}}" class="btn btn-info btn-xs">
+                      <i class="fa fa-pen"></i>
+                    </a>
                   </td>
                 </tr>
               </tbody>

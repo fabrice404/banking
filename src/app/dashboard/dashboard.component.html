@@ -66,7 +66,7 @@
           <tbody>
             <ng-container *ngFor="let operation of operations">
               <tr *ngIf="(operation.date|date:'yyyyMMdd') <= (now)">
-                <td>
+                <td class="text-center icon">
                   <i class="{{ operation.account.icon }} color-{{ operation.account.color }}"></i>
                 </td>
                 <td>
@@ -81,14 +81,14 @@
                     </small>
                   </div>
                 </td>
-                <td>{{ operation.category.name}}</td>
-                <td class=text-right>{{ operation.date|date:'EEE dd/MM' }}</td>
-                <td class=text-right>{{ operation.amount|currency:operation.account.currency:2 }}</td>
-                <td class=text-right>
-                  <a *ngIf="(operation.date|date:'yyyyMMdd') <= (now)" class="btn btn-success btn-xs btn-icon" (click)="checkOperation(operation.id)">
+                <td class="category">{{ operation.category.name}}</td>
+                <td class="text-right date">{{ operation.date|date:'EEE dd/MM' }}</td>
+                <td class="text-right amount">{{ operation.amount|currency:operation.account.currency:2 }}</td>
+                <td class="text-right buttons">
+                  <a *ngIf="(operation.date|date:'yyyyMMdd') <= (now)" class="btn btn-success btn-xs" (click)="checkOperation(operation.id)">
                     <i class="fa fa-check"></i>
                   </a>
-                  <a routerLink="/operation/{{operation.id}}" class="btn btn-info btn-xs btn-icon">
+                  <a routerLink="/operation/{{operation.id}}" class="btn btn-info btn-xs">
                     <i class="fa fa-pen"></i>
                   </a>
                 </td>
@@ -112,7 +112,7 @@
           <tbody>
             <ng-container *ngFor="let operation of operations">
               <tr *ngIf="(operation.date|date:'yyyyMMdd') > (now)">
-                <td>
+                <td class="text-center icon">
                   <i class="{{ operation.account.icon }} color-{{ operation.account.color }}"></i>
                 </td>
                 <td>
@@ -127,14 +127,14 @@
                     </small>
                   </div>
                 </td>
-                <td>{{ operation.category.name}}</td>
-                <td class=text-right>{{ operation.date|date:'EEE dd/MM' }}</td>
-                <td class=text-right>{{ operation.amount|currency:operation.account.currency:2 }}</td>
-                <td class=text-right>
-                  <a *ngIf="(operation.date|date:'yyyyMMdd') <= (now)" class="btn btn-success btn-xs btn-icon" (click)="checkOperation(operation.id)">
+                <td class="category">{{ operation.category.name}}</td>
+                <td class="text-right date">{{ operation.date|date:'EEE dd/MM' }}</td>
+                <td class="text-right amount">{{ operation.amount|currency:operation.account.currency:2 }}</td>
+                <td class="text-right buttons">
+                  <a *ngIf="(operation.date|date:'yyyyMMdd') <= (now)" class="btn btn-success btn-xs" (click)="checkOperation(operation.id)">
                     <i class="fa fa-check"></i>
                   </a>
-                  <a routerLink="/operation/{{operation.id}}" class="btn btn-info btn-xs btn-icon">
+                  <a routerLink="/operation/{{operation.id}}" class="btn btn-info btn-xs">
                     <i class="fa fa-pen"></i>
                   </a>
                 </td>
@@ -157,15 +157,15 @@
         <table class="table table-striped">
           <tbody>
             <tr *ngFor="let downloadedOperation of downloadedOperations">
-              <td>
+              <td class="text-center icon">
                 <i class="{{ downloadedOperation.account.icon }} color-{{ downloadedOperation.account.color }}"></i>
               </td>
               <td>
                 {{ downloadedOperation.name }}
               </td>
-              <td class=text-right>{{ downloadedOperation.date }}</td>
-              <td class=text-right>{{ downloadedOperation.amount|currency:downloadedOperation.account.currency:2 }}</td>
-              <td class=text-right>
+              <td class="text-right date">{{ downloadedOperation.date }}</td>
+              <td class="text-right amount">{{ downloadedOperation.amount|currency:downloadedOperation.account.currency:2 }}</td>
+              <td class="text-right buttons">
                 <a routerLink="/operation" [queryParams]="{account: downloadedOperation.accountId, amount: downloadedOperation.amount, date:downloadedOperation.date, name: downloadedOperation.name}"
                   class="btn btn-info btn-xs btn-icon">
                   <i class="fa fa-plus"></i>
