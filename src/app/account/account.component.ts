@@ -72,6 +72,7 @@ export class AccountComponent implements OnInit {
     }
     this.dates.push(year);
 
+    this.chart = null;
     this.getAccount();
     this.getOperations();
   }
@@ -142,5 +143,10 @@ export class AccountComponent implements OnInit {
           });
       });
 
+  }
+
+  uncheckOperation(operationId: number): void {
+    this.operationService.uncheck(operationId)
+      .subscribe(() => this.init());
   }
 }
