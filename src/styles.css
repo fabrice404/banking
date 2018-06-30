@@ -11,6 +11,7 @@ td.date, td.amount, td.buttons { width: 10%; }
 .account-name { white-space: nowrap; }
 .filter { display: none; }
 
+.color-aib { color: #7f2b7b; }
 .color-boursorama { color: #d10173; }
 .color-caisse-epargne { color: #db0029; }
 .color-kbc { color: #009fda; }
