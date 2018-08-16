@@ -2,8 +2,8 @@
   <li [ngClass]="{ active: router.url == '/dashboard' }">
     <a routerLink="/dashboard">
       <i class="fa fa-tasks"></i>
-      <p>Dashboard
-        {{selectedItem}}</p>
+      <p>Dashboard {{selectedItem}}
+      </p>
     </a>
   </li>
   <li *ngIf="accounts == null">
@@ -14,8 +14,11 @@
   <ng-container *ngFor="let account of accounts">
     <li [ngClass]="{ active: router.url == '/account/' + account.id }">
       <a routerLink="/account/{{account.id}}">
-        <i class="{{ account.icon }}"></i>
-        <p>{{ account.name }}</p>
+        <p>
+          <i>
+            <img src="assets/img/{{ account.icon }}.png" />
+          </i> {{ account.name }}
+        </p>
       </a>
     </li>
   </ng-container>
