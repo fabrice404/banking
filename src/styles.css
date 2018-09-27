@@ -8,7 +8,9 @@ td.icon { width: 5%; }
 td.category { width: 20%; }
 td.date, td.amount, td.buttons { width: 10%; }
 
-.account-name { white-space: nowrap; }
+.card .numbers { font-size: 1.4em; }
+.card .account-name { font-size: 0.7em; white-space: nowrap; }
+.card .stats { font-size: 0.8em; }
 .filter { display: none; }
 
 .color-aib { color: #7f2b7b; }
